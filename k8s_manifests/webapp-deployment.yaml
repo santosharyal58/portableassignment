@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-deployment
+  labels:
+    name: webapp
+    app: employees
+spec:
+  replicas: 3  # You can adjust the number of replicas as needed
+  selector:
+    matchLabels:
+      app: employees
+  template:
+    metadata:
+      labels:
+        app: employees
+      annotations:
+        custom.dbport: "3306"  # Set the DBPORT value as an annotation
+    spec:
+      containers:
+      - name: colorapp
+        image: 683155782533.dkr.ecr.us-east-1.amazonaws.com/colorapp
+        ports:
+        - containerPort: 80
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "password"
+        - name: DBHOST
+          value: "mysql-service.mydb.svc.cluster.local"
+        - name: DBPORT
+          value: "3306"
