@@ -28,7 +28,7 @@ jobs:
     - name: Manage colorapp images
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: colorapp
+        ECR_REPOSITORY: colorappv2
         IMAGE_TAG: latest
       run: |
         ls -ltra
